@@ -2,6 +2,7 @@ import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:food_ordering_app/classes/food_class.dart';
 import 'package:food_ordering_app/classes/user_class.dart';
+import 'package:food_ordering_app/pages/cart_page.dart';
 import 'package:food_ordering_app/widgets/card_widges2.dart';
 import 'package:food_ordering_app/widgets/categorie_widget.dart';
 import 'package:food_ordering_app/widgets/search_widget.dart';
@@ -25,6 +26,7 @@ class _HomePageState extends State<HomePage> {
     foods = user1.jsonData.map((item) => Food.fromJson(item)).toList();
     categories = foods.map((item) => item.category).toList();
   }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +37,11 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: EdgeInsets.all(21),
             child: badges.Badge(
+              onTap: (){
+               Navigator.push(context, MaterialPageRoute(builder: (context)=> CartPages(user1: user1)));
+              },
               badgeContent: Text("${user1.cartNumber}"),
-              child: Icon(Icons.shopping_cart_outlined),
+              child: Icon(Icons.favorite),
             ),
           ),
         ],
